@@ -1,0 +1,9 @@
+{
+  "name": "ClimateMisinformation!",
+  "description": "A Google Chrome extension for identifying and highlighting climate misinformation on major media sites!",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+	"48": "/assests/icon/48.png"
+  }
+}
