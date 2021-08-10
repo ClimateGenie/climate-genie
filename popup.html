@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="assets/css/popup.css">
+   <title>Climate Genie</title>
+</head>
+
+<body>
+    <div id="cg-wrapper">
+
+        <div id="cg-header">
+            <img src="/assets/icons/LilClimateGenie.png">
+            <h1>Climate Genie!</h1>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div id="cg-containers">
+            <p>Hi there friend! My name is Gene and I'm here to help make sense of any Climate Change misinformation you may encounter!</p>
+        </div>
+
+        <div id="cg-containers">
+
+            <div class="cg-form">
+                <label for="text">Something not quite right here?</label>
+                <textarea name="text" id="cg-text" placeholder="Let us know the issue and we will review it!"></textarea>
+            </div>
+
+            <div class=cg-buttons>
+                <button class="button" id="cg-more"><i class="arrow down"></i></button>
+                <button class="button" id="cg-reset">Clear</button>
+                <button class="button primary" id="cg-button">Send Report</button>
+            </div>
+
+        </div>
+    </div>
+    <script src="/assets/js/popup.js"></script>
+</body>
+
+</html>

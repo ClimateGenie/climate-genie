@@ -1,9 +1,16 @@
 {
-  "name": "ClimateMisinformation!",
-  "description": "A Google Chrome extension for identifying and highlighting climate misinformation on major media sites!",
+  "name": "Climate Genie!",
+  "description": "A Google Chrome extension for identifying, highlighting and countering climate misinformation on major media sites!",
   "version": "1.0",
   "manifest_version": 3,
+  "author": "Kyle Herbertson and Alfie Chadwick",
+  "permissions": [
+		"tabs"
+  ],
   "icons": {
-	"48": "/assests/icon/48.png"
+	"48": "/assets/icons/LilClimateGenie.png"
+  },
+  "action": {
+  "default_popup": "popup.html"
   }
 }
