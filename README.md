@@ -6,7 +6,7 @@ A web extension for recognising and debunking climate misinformation. Built in t
 
 Using community submitted debunking statements, a 'climate genie' will pop up along-side the article and debunk the misinformation in the article. The genie will refer the reader to more reputable links.
 
-![sample-web-view](https://github.com/Fonzzy1/Climate-Genie/blob/main/Assets/Screenshots/WebpagePilotImage.png?raw=true)
+![sample-web-view](https://github.com/Fonzzy1/Climate-Genie/blob/main/assets/Screenshots/WebpagePilotImage.png?raw=true)
 
 ## Community Reporting system
 
