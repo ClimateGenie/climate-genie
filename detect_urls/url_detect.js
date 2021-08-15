@@ -16,7 +16,6 @@ function main() {
  chrome.tabs.query(queryInfo, function(tabs) {
     var tab = tabs[0];
     var title = tab.title
-    alert(title)
 
     let i = 0
     var stat = 0
@@ -26,8 +25,9 @@ function main() {
         if (title.includes(keywords[i])) { stat += 1}
         i += 1
     }
+    var message
+    if (stat > 0 ) {  message  = 'Running'}   else { message = "No climate information to parse"}
 
-
-    alert(stat)
+    alert(message)
   });}
 
