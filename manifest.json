@@ -5,7 +5,8 @@
   "manifest_version": 3,
   "author": "Kyle Herbertson and Alfie Chadwick",
   "permissions": [
-		"tabs"
+		"tabs",
+    "storage"
   ],
   "icons": {
 	"48": "/assets/Icons/LilClimateGenie.png"

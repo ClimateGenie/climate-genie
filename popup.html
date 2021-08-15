@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+     <script type="text/javascript" src=./popup.js"></script>
+    <script type="text/javascript" src="./detect_urls/url_detect.js"></script>
    <link rel="stylesheet" href="assets/css/popup.css">
    <title>Climate Genie</title>
 </head>
 
 <body>
+
     <div id="cg-wrapper">
 
         <div id="cg-header">
-            <img src="/assets/Icons/LilClimateGenie.png">
+            <img src="./assets/Icons/LilClimateGenie.png">
             <h1>Climate Genie!</h1>
-            <label class="switch">
-                <input type="checkbox">
+            <label class="switch" >
+                <input type="checkbox" id = 'check'>
                 <span class="slider round"></span>
             </label>
         </div>
@@ -30,7 +33,7 @@
 
             <div class=cg-buttons>
                 <button class="button" id="cg-more"><i class="arrow down"></i></button>
-                <button class="button" id="cg-reset">Clear</button>
+                <button class="button" id="cg-run">Run</button>
                 <button class="button primary" id="cg-button">Send Report</button>
             </div>
 
