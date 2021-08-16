@@ -1,9 +1,5 @@
 
 
-
-const run = new Event('run');
-const idle = new Event('idle');
-
 // listen for new page needed to be tested
 document.addEventListener('start_run_test', test_to_run)
 
@@ -23,9 +19,12 @@ function test_to_run() {
     var tab = tabs[0];
     var title = tab.title
     var url = tab.url
-
+    var tab_id = tab.id
     let i = 0
     var stat = 0
+
+    var  run = new Event('run',  {  "detail": {"url":url,"tab_id":tab_id } });
+    var  idle = new Event('idle',  {  "detail": {"url":url,"tab_id":tab_id } });
 
      // for each keyword, check if in page title
      // TODO: Add in some form of black list so that this wont trigger on unwanted sites
@@ -38,11 +37,11 @@ function test_to_run() {
     // If enough keywords match, call to run, else idle
     if (stat > 0 ) {
 
-        console.log('dispatch run')
+        console.log('dispatch run at tab_id:' + tab_id)
         document.dispatchEvent(run)
 
     }
-    else{ console.log('dispatch idle')
+    else{ console.log('dispatch idle at tab_id:' + tab_id)
         document.dispatchEvent(idle)}
 
 
