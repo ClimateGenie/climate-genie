@@ -7,13 +7,14 @@
   "permissions": [
 	"tabs",
     "storage",
-    "<all_urls>"
+    "<all_urls>",
+    "activeTab"
   ],
   "icons": {
 	"48": "/assets/Icons/LilClimateGenie.png"
   },
     "background": {
-    "scripts": ["/assets/js/background.js","/assets/js/test_to_run.js", "assets/js/parse.js"],
+    "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js"],
     "persistent": false
   },
     "browser_action": {

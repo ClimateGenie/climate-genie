@@ -16,9 +16,9 @@ function test_to_run() {
   };
 
     chrome.tabs.query(queryInfo, function( tabs) {
-        // Log the event taking place
-        console.log('Retrieving Tab Info')
-        // Instantiate all the tab information details
+    // Log the event taking place
+    console.log('Retrieving Tab Info')
+    // Instantiate all the tab information details
     var tab = tabs[0];
     var title = tab.title
     var url = tab.url
@@ -32,16 +32,15 @@ function test_to_run() {
         // For each keyword, check if in page title
         // TODO: Add in some form of black list so that this wont trigger on unwanted sites
     for (let i = 0; i < keywords.length; i++) {
-        if (title.includes(keywords[i])) {
+        if (title.toLowerCase().includes(keywords[i])) {
             stat += 1
         }
     }
     // If enough keywords match, call to run, else idle
-    if (stat > 0 ) {
+    if (stat > 0) {
         console.log('Dispatch Run at Tab_id:' + tab_id)
         document.dispatchEvent(run)
     }
     else{ console.log('Dispatch Idle at Tab_id:' + tab_id)
         document.dispatchEvent(idle)}
-    })
-    return false;}
+    })}
