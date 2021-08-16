@@ -1,26 +1,27 @@
+// Primary Executor of the extension functionality
 
-const run_test = new Event('start_run_test');
+// Event Triggers
+const run_check = new Event('start_check');
 const run_parse = new Event('start_parse')
 
 
-// Listen for new tabs or changed tabs after update
-// If event occurs send event for the test to run to occur
+// This listens for when tabs receive a package be it in loading/updating/refreshing
 chrome.tabs.onUpdated.addListener(function (){
-        console.log('detected active tab')
-        document.dispatchEvent(run_test)
-    }
-
-)
-
+        // Log the event trigger
+        console.log('Active Tab Detected')
+        // Dispatch an event to trigger the 'run-check' function
+        // This function will then check what actions need to occur for the current page/tab -> see check.js
+        document.dispatchEvent(run_check)
+})
 
 
 // Wait for response from the test to run page anf then log run statement
 document.addEventListener('run', function () {
-    console.log('run')
+    // Log the event trigger
+    console.log('Parse the page contents')
+    // Dispatch an event to trigger the 'run-parse' function
     document.dispatchEvent(run_parse)
-    return false}
-
- );
+    return false});
 
 
 

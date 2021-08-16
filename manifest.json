@@ -5,7 +5,7 @@
   "manifest_version": 2,
   "author": "Kyle Herbertson and Alfie Chadwick",
   "permissions": [
-		"tabs",
+	"tabs",
     "storage",
     "<all_urls>"
   ],
@@ -19,6 +19,6 @@
     "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "/assets/Icons/LilClimateGenie.png",
-    "default_script": "assets/js/popup.js" }
+    "default_script": "/assets/js/popup.js" }
 
 }
