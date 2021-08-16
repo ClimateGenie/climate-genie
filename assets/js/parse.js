@@ -11,6 +11,17 @@ function parser() {
 	chrome.tabs.query({ currentWindow: true, active: true }, function ( tabs) {
 		var tab = tabs[0];
 		var domain = tab.url.toString();
-		console.log(domain)
+		let xhr = new XMLHttpRequest();
+		xhr.onload = () => {
+			let doc = xhr.responseXML;
+			var resultText = xhr.response.body.innerHTML;
+			console.log(resultText)
+		}
+		xhr.onerror = () => console.error('error');
+		xhr.open("GET", domain, true);
+		xhr.responseType = 'document';
+		xhr.send();
+
 });
+	
 }
