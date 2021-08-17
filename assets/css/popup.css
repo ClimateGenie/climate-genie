@@ -24,6 +24,7 @@ body {
 
 .button {
     font-family: Roboto, system-ui, sans-serif;
+    text-decoration: none;
     align-items: center;
     border: 1px solid rgb( 218, 220, 224 );
     border-radius: 4px;
@@ -108,8 +109,6 @@ textarea {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
 }
 
 .slider:before {
@@ -120,8 +119,6 @@ textarea {
   left: 2px;
   bottom: 2px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
 }
 
 input:checked + .slider {

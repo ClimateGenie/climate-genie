@@ -2,6 +2,7 @@
 
 // Listen for the event that shows there is a new page to check and execute the function test_to_run
 document.addEventListener('start_check', test_to_run)
+document.addEventListener('start_run', just_run)
 
 // Dispatches an event of either run/idle in response to the question regarding whether or not the site content should be checked.
 function test_to_run() {
@@ -44,3 +45,28 @@ function test_to_run() {
     else{ console.log('Dispatch Idle at Tab_id:' + tab_id)
         document.dispatchEvent(idle)}
     })}
+
+// Runs the site content regardless of what it is
+function just_run() {
+
+     // Set up basis for a query
+     var queryInfo = {
+     active: true,
+     currentWindow: true
+   };
+ 
+     chrome.tabs.query(queryInfo, function( tabs) {
+     // Log the event taking place
+     console.log('Retrieving Tab Info')
+     // Instantiate all the tab information details
+     var tab = tabs[0];
+     var title = tab.title
+     var url = tab.url
+     var tab_id = tab.id
+     // Instantiate the possible output event
+     var  run = new Event('run',  {"detail": {"url":url,"tab_id":tab_id } });
+
+     // Dispatch the event
+     console.log('Dispatch Run at Tab_id:' + tab_id)
+     document.dispatchEvent(run)
+     })}
