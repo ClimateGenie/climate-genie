@@ -9,7 +9,7 @@ function parser() {
 	// Firstly log that the function is running
 	console.log('Parsing content')
 	// Queries the current tab
-	chrome.tabs.query({ currentWindow: true, active: true }, function ( tabs) {
+	chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
 		var tab = tabs[0];
 		// Get the url of the current tab
 		var domain = tab.url.toString();
@@ -20,7 +20,15 @@ function parser() {
 			// Get all elements in the body of the response that are paragraph text
 			var resultText = xhr.response.body.getElementsByTagName('p');
 			// Return the 1st of these. (innerHTMl strips the tags and just gives text)
-			console.log(resultText[0].innerHTML)
+
+
+			for (let i = 0; i < resultText.length; i++){
+				var string = resultText[i].innerHTML
+				var paragraph = new CustomEvent('paragraph_found', {"detail":  string})
+				document.dispatchEvent(paragraph)
+			}
+			// Create and Dispatch event containing the result paragraphs
+
 		}
 		// On error occurring log to console
 		xhr.onerror = () => console.error('error');
@@ -29,6 +37,7 @@ function parser() {
 		xhr.responseType = 'document';
 		// Send the response
 		xhr.send();
+
 
 });
 	

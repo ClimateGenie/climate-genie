@@ -14,7 +14,7 @@
 	"48": "/assets/Icons/LilClimateGenie.png"
   },
     "background": {
-    "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js"],
+    "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js", "assets/js/categorise.js", "assets/js/display.js"],
     "persistent": false
   },
     "browser_action": {
