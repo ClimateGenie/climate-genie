@@ -23,19 +23,27 @@ document.addEventListener('run', function () {
     document.dispatchEvent(run_parse)
     return false});
 
-
+// Listen for the parser isolating paragraphs and process occordingly
 document.addEventListener('paragraph_found', function (e) {
+    // Get the attached content in the event detail
     var paragaph  = e.detail
-
+    // Log to console communicating that the paragraph has been seen (include paragraph chunk to check all are seen)    
     console.log('Paragraph Found: ' + paragaph.slice(0,20) + '...' )
-    var run_categorise = new CustomEvent('run_categorise', {"detail":  paragaph})
+    // Create a new event for the detected paragraph that will announce it is ready to be categorised.
+    var run_categorise = new CustomEvent('start_categorise', {"detail":  paragaph})
+    // Dispatch this event
     document.dispatchEvent(run_categorise)
 })
 
+// Listen for the recieval of non-zero classifications
 document.addEventListener('return_cat', function (e) {
+    // Get the specific label
     var cat = e.detail
-    console.log('categorized as: ' + cat )
+    // Log the label
+    console.log('Claim categorized as: ' + cat )
+    // Create a new event to trigger the display to user
     var run_display = new CustomEvent('run_display', {"detail": cat})
+    // Dispatch event for listener
     document.dispatchEvent(run_display)
 })
 
