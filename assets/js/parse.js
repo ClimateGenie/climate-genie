@@ -8,18 +8,26 @@ function parser() {
 	
 	// Firstly log that the function is running
 	console.log('Parsing content')
+	// Queries the current tab
 	chrome.tabs.query({ currentWindow: true, active: true }, function ( tabs) {
 		var tab = tabs[0];
+		// Get the url of the current tab
 		var domain = tab.url.toString();
+		// Begin a new HTTP request 
 		let xhr = new XMLHttpRequest();
+		// Once loaded ->
 		xhr.onload = () => {
-			let doc = xhr.responseXML;
-			var resultText = xhr.response.body.innerHTML;
-			console.log(resultText)
+			// Get all elements in the body of the response that are paragraph text
+			var resultText = xhr.response.body.getElementsByTagName('p');
+			// Return the 1st of these. (innerHTMl strips the tags and just gives text)
+			console.log(resultText[0].innerHTML)
 		}
+		// On error occurring log to console
 		xhr.onerror = () => console.error('error');
 		xhr.open("GET", domain, true);
+		// IMPORTANT: response type must be a document in order to use it as a normal site object
 		xhr.responseType = 'document';
+		// Send the response
 		xhr.send();
 
 });
