@@ -1,8 +1,26 @@
 // Variable to store a reference to the background.js file
 var backgroundPage;
+var background_vars = chrome.extension.getBackgroundPage();
+
 
 // Create an event listener within the popup to check when the content is loaded (incorporates updates)
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Set color of run button
+    if (background_vars.running == true) {
+        document.getElementById('cg-run').style.background = '#ff0000'
+        document.getElementById('cg-run').style.borderColor = '#900000'
+        document.getElementById('cg-run').textContent = 'Active'
+    }
+
+    else
+    {
+        document.getElementById('cg-run').style.background = '#1A73E8'
+        document.getElementById('cg-run').style.borderColor = '#1A73E8'
+        document.getElementById('cg-run').textContent = 'Run'
+    }
+
+
 
     /*TOGGLE*/
     restoreOptions();

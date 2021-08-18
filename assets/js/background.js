@@ -6,13 +6,15 @@ var extensionEnabled = false;
 // Bool determining if a manual run is requested
 var manualRun = false;
 
+var running = false
+
 // Event Triggers
 const run_check = new Event('start_check');
 const run_nocheck = new Event('start_run');
 const run_parse = new Event('start_parse');
 
 // This listens for when tabs receive a package be it in loading/updating/refreshing or a manual run is triggered
-chrome.tabs.onUpdated.addListener(function (){
+chrome.tabs.onActivated.addListener(function (){
         // Check whether or not the extension is enabled
         if (extensionEnabled && !manualRun) {
             // Log the event trigger
@@ -67,4 +69,13 @@ document.addEventListener('return_cat', function (e) {
     document.dispatchEvent(run_display)
 })
 
+
+// Event Managment for run status
+document.addEventListener('run', function () {
+    running = true
+})
+
+document.addEventListener('idle', function () {
+    running = false
+})
 
