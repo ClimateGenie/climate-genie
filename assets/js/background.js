@@ -35,20 +35,15 @@ chrome.runtime.onMessage.addListener( function (request) {
 })
 
 
-// This listens for when tabs receive a package be it in loading/updating/refreshing or a manual run is triggered
+// This listens for when tabs are activated
 chrome.tabs.onActivated.addListener(function (){
-        // Check whether or not the extension is enabled
-        if (extensionEnabled) {
-            // Log the event trigger
-            console.log('Update Tab Detected')
-            // Dispatch an event to trigger the 'run-check' function
-            // This function will then check what actions need to occur for the current page/tab -> see check.js
-            document.dispatchEvent(run_check)
-        }
-        else {
-            // Just do nothing if it's not enabled
-            return false;
-        }
+    pageCheck()
+});
+
+
+// This listens for when tabs are created
+chrome.tabs.onCreated.addListener(function (){
+    pageCheck()
 });
 
 
@@ -94,3 +89,19 @@ document.addEventListener('return_cat', function (e) {
     // Dispatch event for listener
     document.dispatchEvent(run_display)
 })
+
+/*BACKGROUND FUNCTIONS*/
+function pageCheck(){
+    // Check whether or not the extension is enabled
+    if (extensionEnabled) {
+        // Log the event trigger
+        console.log('Update Tab Detected')
+        // Dispatch an event to trigger the 'run-check' function
+        // This function will then check what actions need to occur for the current page/tab -> see check.js
+        document.dispatchEvent(run_check)
+    }
+    else {
+        // Just do nothing if it's not enabled
+        return false;
+    }
+};
