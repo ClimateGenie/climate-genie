@@ -2,6 +2,7 @@
 
 // Variable to store the status of the extension
 var extensionEnabled = false;
+// Boolean to track whether or not the extension is running on the 
 var running = false
 
 // Event Triggers
@@ -10,23 +11,28 @@ const run_nocheck = new Event('start_run');
 const run_parse = new Event('start_parse');
 
 
-
+// Add a listener for messages sent from the popup
 chrome.runtime.onMessage.addListener( function (request) {
+    // If the received message is requesting a manual run
     if (request.message == 'Manual Run') {
-            if( !running) {
-                running = true
-                // Log the event trigger
-                console.log('manual run')
-                // Dispatch an event to trigger the 'run-check' function
-                // This function will then check what actions need to occur for the current page/tab -> see check.js
-                document.dispatchEvent(run_nocheck)
-             }
-            else {return false}}
-    else {return  false}
-
-
+        // If the process is not already running
+        if(!running) {
+            // Set running
+            running = true
+            // Log the event trigger
+            console.log('manual run')
+            // Dispatch an event to trigger the 'run-check' function
+            // This function will then check what actions need to occur for the current page/tab -> see check.js
+            document.dispatchEvent(run_nocheck)
+            }
+        else {
+            return false
+        }
+        }
+    else {
+        return false
+    }
 })
-
 
 
 // This listens for when tabs receive a package be it in loading/updating/refreshing or a manual run is triggered
@@ -39,8 +45,6 @@ chrome.tabs.onActivated.addListener(function (){
             // This function will then check what actions need to occur for the current page/tab -> see check.js
             document.dispatchEvent(run_check)
         }
-
-
         else {
             // Just do nothing if it's not enabled
             return false;
@@ -50,11 +54,22 @@ chrome.tabs.onActivated.addListener(function (){
 
 // Wait for response from the test to run page anf then log run statement
 document.addEventListener('run', function () {
+    // Set running to be true
+    running = true;
     // Log the event trigger
     console.log('Parse the page contents')
     // Dispatch an event to trigger the 'run-parse' function
     document.dispatchEvent(run_parse)
-    return false});
+    return false
+});
+
+
+// Listen for idle event
+document.addEventListener('idle', function () {
+    // Set running to be false
+    running = false
+});
+
 
 // Listen for the parser isolating paragraphs and process occordingly
 document.addEventListener('paragraph_found', function (e) {
@@ -79,14 +94,3 @@ document.addEventListener('return_cat', function (e) {
     // Dispatch event for listener
     document.dispatchEvent(run_display)
 })
-
-
-// Event Managment for run status
-document.addEventListener('run', function () {
-    running = true
-})
-
-document.addEventListener('idle', function () {
-    running = false
-})
-
