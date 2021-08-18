@@ -14,12 +14,19 @@ const run_parse = new Event('start_parse');
 // This listens for when tabs receive a package be it in loading/updating/refreshing or a manual run is triggered
 chrome.tabs.onUpdated.addListener(function (){
         // Check whether or not the extension is enabled
-        if (extensionEnabled) {
+        if (extensionEnabled && !manualRun) {
             // Log the event trigger
             console.log('Update Tab Detected')
             // Dispatch an event to trigger the 'run-check' function
             // This function will then check what actions need to occur for the current page/tab -> see check.js
             document.dispatchEvent(run_check)
+        }
+        else if(extensionEnabled && manualRun){
+            // Log the event trigger
+            console.log('Tab Detected')
+            // Dispatch an event to trigger the 'run-check' function
+            // This function will then check what actions need to occur for the current page/tab -> see check.js
+            document.dispatchEvent(run_nocheck)
         }
         else {
             // Just do nothing if it's not enabled
