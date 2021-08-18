@@ -1,9 +1,11 @@
 // Variable to store a reference to the background.js file
-var backgroundPage = chrome.extension.getBackgroundPage();
+var backgroundPage;
 
 // Create an event listener within the popup to check when the content is loaded (incorporates updates)
 document.addEventListener('DOMContentLoaded', function () {
 
+    backgroundPage = chrome.extension.getBackgroundPage();
+    
     /*RUN-MANUAL*/
     restoreRunState();
     // Add event listener to the run button
