@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set color of run button
     if (background_vars.running == true) {
-        document.getElementById('cg-run').style.background = '#ff0000'
-        document.getElementById('cg-run').style.borderColor = '#900000'
+        document.getElementById('cg-run').style.background = '#20cc55'
+        document.getElementById('cg-run').style.borderColor = '#20cc55'
         document.getElementById('cg-run').textContent = 'Active'
     }
 
@@ -20,8 +20,15 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('cg-run').textContent = 'Run'
     }
 
+    document.getElementById('cg-run').addEventListener('click', function () {
+        document.getElementById('cg-run').style.background = '#20cc55'
+        document.getElementById('cg-run').style.borderColor = '#20cc55'
+        document.getElementById('cg-run').textContent = 'Active'
+    })
 
-
+    document.getElementById('cg-run').addEventListener('click', function () {
+        chrome.runtime.sendMessage({message: 'Manual Run'})
+    })
     /*TOGGLE*/
     restoreOptions();
     // Create a variable to store the switch input (it's a stylised checkbox)
@@ -64,7 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Set it to the reference variable
             backgroundPage = bgpage;
             // Update manualRun variable to true
-            backgroundPage.manualRun = true;
+            //backgroundPage.manualRun = true;
+
         })
     });
 });

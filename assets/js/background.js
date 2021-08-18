@@ -2,10 +2,6 @@
 
 // Variable to store the status of the extension
 var extensionEnabled = false;
-
-// Bool determining if a manual run is requested
-var manualRun = false;
-
 var running = false
 
 // Event Triggers
@@ -13,23 +9,38 @@ const run_check = new Event('start_check');
 const run_nocheck = new Event('start_run');
 const run_parse = new Event('start_parse');
 
+
+
+chrome.runtime.onMessage.addListener( function (request) {
+    if (request.message == 'Manual Run') {
+            if( !running) {
+                running = true
+                // Log the event trigger
+                console.log('manual run')
+                // Dispatch an event to trigger the 'run-check' function
+                // This function will then check what actions need to occur for the current page/tab -> see check.js
+                document.dispatchEvent(run_nocheck)
+             }
+            else {return false}}
+    else {return  false}
+
+
+})
+
+
+
 // This listens for when tabs receive a package be it in loading/updating/refreshing or a manual run is triggered
 chrome.tabs.onActivated.addListener(function (){
         // Check whether or not the extension is enabled
-        if (extensionEnabled && !manualRun) {
+        if (extensionEnabled) {
             // Log the event trigger
             console.log('Update Tab Detected')
             // Dispatch an event to trigger the 'run-check' function
             // This function will then check what actions need to occur for the current page/tab -> see check.js
             document.dispatchEvent(run_check)
         }
-        else if(extensionEnabled && manualRun){
-            // Log the event trigger
-            console.log('Tab Detected')
-            // Dispatch an event to trigger the 'run-check' function
-            // This function will then check what actions need to occur for the current page/tab -> see check.js
-            document.dispatchEvent(run_nocheck)
-        }
+
+
         else {
             // Just do nothing if it's not enabled
             return false;
