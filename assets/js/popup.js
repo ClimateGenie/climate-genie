@@ -7,7 +7,18 @@ document.addEventListener('DOMContentLoaded', function () {
     backgroundPage = chrome.extension.getBackgroundPage();
     
     /*RUN-MANUAL*/
-    restoreRunState();
+    if (backgroundPage.running && backgroundPage.extensionEnabled) {
+        document.getElementById('cg-run').style.background = '#20cc55'
+        document.getElementById('cg-run').style.borderColor = '#20cc55'
+        document.getElementById('cg-run').textContent = 'Active'
+    }
+
+    else
+    {
+        document.getElementById('cg-run').style.background = '#1A73E8'
+        document.getElementById('cg-run').style.borderColor = '#1A73E8'
+        document.getElementById('cg-run').textContent = 'Run'
+    }
     // Add event listener to the run button
     document.getElementById('cg-run').addEventListener('click', function () {
         // Set appearance changes (colour + text)
@@ -58,21 +69,4 @@ function restoreOptions() {
     }, function (items) {
         document.querySelector('input[id="toggleOnOff"]').checked = items.value
     });
-};
-
-/*RUN-BUTTON-STYLE*/
-function restoreRunState(){
-// Set color of run button
-    if (backgroundPage.running == true) {
-        document.getElementById('cg-run').style.background = '#20cc55'
-        document.getElementById('cg-run').style.borderColor = '#20cc55'
-        document.getElementById('cg-run').textContent = 'Active'
-    }
-
-    else
-    {
-        document.getElementById('cg-run').style.background = '#1A73E8'
-        document.getElementById('cg-run').style.borderColor = '#1A73E8'
-        document.getElementById('cg-run').textContent = 'Run'
-    }
 };
