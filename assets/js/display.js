@@ -5,16 +5,16 @@ document.addEventListener('run_display', function (e) {
     // Get the label
     var cat = e.detail
     // Split the label into claim and subclaim
-    if ( cat != 0) {
-        var [main, sub] = cat.split('.')
+    var [main, sub] = cat.split('.')
 
-        // TODO: Make this a backend lookup for responses
-        var responses = [['0.0', '0.1'], ['1.0', 'this is false']]
+    // TODO: Make this a backend lookup for responses
+    var responses = [['0.0', '0.1'], ['1.0', 'this is false']]
 
-        // Lookup the corresponding message based on the claim and subclaim
-        var message = responses[main][sub]
+    // Lookup the corresponding message based on the claim and subclaim
+    var message = responses[main][sub]
 
-        // Serve this to the user as a popup alert
-        alert(message)
-    }
+    // Serve this to the user as a popup alert
+    var send = new CustomEvent ('send_response',{"detail":message})
+    document.dispatchEvent(send)
+
 })

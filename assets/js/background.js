@@ -8,6 +8,10 @@ var running = false
 // Value for current URL
 var current_url
 
+var messageArray
+
+var messageCounter = 0
+
 // Event Triggers
 const run_check = new Event('start_check');
 const run_nocheck = new Event('start_run');
@@ -49,6 +53,9 @@ document.addEventListener('run', function (e) {
     if (e.detail.url != current_url) {
         // Set current url
         current_url = e.detail.url
+        // empty message array
+        messageArray = []
+        var messageCounter = 0
         // Set running to be true
         running = true;
         // Log the event trigger
@@ -66,6 +73,9 @@ document.addEventListener('idle', function (e) {
         if (e.detail.url != current_url) {
             // Set current url
             current_url = e.detail.url
+            // empty message array
+            messageArray = []
+            var messageCounter = 0
             // Set running to be false
             running = false
 
@@ -97,9 +107,29 @@ document.addEventListener('return_cat', function (e) {
     console.log('Claim categorized as: ' + cat )
     // Create a new event to trigger the display to user
     var run_display = new CustomEvent('run_display', {"detail": cat})
+    //Increment message
+    messageCounter += 1
     // Dispatch event for listener
-    document.dispatchEvent(run_display)
+    setTimeout( function(){
+    document.dispatchEvent(run_display)},2000)
 })
+
+document.addEventListener('send_response', function (e) {
+    var message = e.detail
+    messageArray.push(message)
+    if (messageArray.length == messageCounter)
+            {var diplayArray = messageArray.filter(function(item) {
+    return item != '0.0'
+})
+
+
+                alert(diplayArray)}
+
+    }
+    )
+
+
+
 
 /*BACKGROUND FUNCTIONS*/
 function pageCheck(){

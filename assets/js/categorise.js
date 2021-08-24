@@ -22,7 +22,7 @@ if (paragraph.toString().includes('IPCC') == true) {
     // Get a claim indicator
     var cat = '1.1'
 }
-    else cat = '0'
+    else cat = '0.0'
 
     return cat
 
