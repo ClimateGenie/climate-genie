@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', function () {
     backgroundPage = chrome.extension.getBackgroundPage();
     
     /*RUN-MANUAL*/
-    if (backgroundPage.running && backgroundPage.extensionEnabled) {
+    if ( ! backgroundPage.extensionEnabled) {
+        document.getElementById('cg-run').style.background = '#808286'
+        document.getElementById('cg-run').style.borderColor = '#808286'
+        document.getElementById('cg-run').textContent = 'Inactive'
+    }
+
+    else if (backgroundPage.running && backgroundPage.extensionEnabled) {
         document.getElementById('cg-run').style.background = '#20cc55'
         document.getElementById('cg-run').style.borderColor = '#20cc55'
         document.getElementById('cg-run').textContent = 'Active'
