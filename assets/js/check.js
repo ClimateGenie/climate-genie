@@ -25,8 +25,8 @@ function test_to_run() {
     var url = tab.url
     var tab_id = tab.id
     // Instantiate the two possible output events
-    var  run = new Event('run',  {"detail": {"url":url,"tab_id":tab_id } });
-    var  idle = new Event('idle',  {"detail": {"url":url,"tab_id":tab_id } });
+    var  run = new CustomEvent('run',  {"detail": {"url":url,"tab_id":tab_id } });
+    var  idle = new CustomEvent('idle',  {"detail": {"url":url,"tab_id":tab_id } });
 
     // Instantiate a counter to check relevance
     var stat = 0
@@ -64,7 +64,7 @@ function just_run() {
      var url = tab.url
      var tab_id = tab.id
      // Instantiate the possible output event
-     var  run = new Event('run',  {"detail": {"url":url,"tab_id":tab_id } });
+     var  run = new CustomEvent('run',  {"detail": {"url":url,"tab_id":tab_id } });
 
      // Dispatch the event
      console.log('Dispatch Run at Tab_id:' + tab_id)

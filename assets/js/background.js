@@ -1,9 +1,12 @@
 // Primary Executor of the extension functionality
 
 // Variable to store the status of the extension
-var extensionEnabled = false;
+var extensionEnabled = true;
 // Boolean to track whether or not the extension is running on the 
 var running = false
+
+// Value for current URL
+var current_url
 
 // Event Triggers
 const run_check = new Event('start_check');
@@ -36,33 +39,41 @@ chrome.runtime.onMessage.addListener( function (request) {
 
 
 // This listens for when tabs are activated
-chrome.tabs.onActivated.addListener(function (){
-    pageCheck()
-});
-
-
-// This listens for when tabs are created
-chrome.tabs.onCreated.addListener(function (){
+chrome.tabs.onUpdated.addListener(function (){
     pageCheck()
 });
 
 
 // Wait for response from the test to run page anf then log run statement
-document.addEventListener('run', function () {
-    // Set running to be true
-    running = true;
-    // Log the event trigger
-    console.log('Parse the page contents')
-    // Dispatch an event to trigger the 'run-parse' function
-    document.dispatchEvent(run_parse)
-    return false
+document.addEventListener('run', function (e) {
+    if (e.detail.url != current_url) {
+        // Set current url
+        current_url = e.detail.url
+        // Set running to be true
+        running = true;
+        // Log the event trigger
+        console.log('Parse the page contents')
+        // Dispatch an event to trigger the 'run-parse' function
+        document.dispatchEvent(run_parse)
+        return false
+    }
+    else return false
 });
 
 
 // Listen for idle event
-document.addEventListener('idle', function () {
-    // Set running to be false
-    running = false
+document.addEventListener('idle', function (e) {
+        if (e.detail.url != current_url) {
+            // Set current url
+            current_url = e.detail.url
+            // Set running to be false
+            running = false
+
+
+            return false
+        }
+    else return false
+
 });
 
 
