@@ -4,13 +4,13 @@
 var extensionEnabled = true;
 // Boolean to track whether or not the extension is running on the 
 var running = false
-
 // Value for current URL
 var current_url
-
+// Array to store all messages to be displayed for the current url
 var messageArray
-
+// A counter that is the length of message array just set independently
 var messageCounter = 0
+
 
 // Event Triggers
 const run_check = new Event('start_check');
@@ -107,29 +107,29 @@ document.addEventListener('return_cat', function (e) {
     console.log('Claim categorized as: ' + cat )
     // Create a new event to trigger the display to user
     var run_display = new CustomEvent('run_display', {"detail": cat})
-    //Increment message
+    //Increment message counter 
     messageCounter += 1
-    // Dispatch event for listener
+    // Dispatch event for listener after a short delay to account for async
     setTimeout( function(){
-    document.dispatchEvent(run_display)},2000)
+        document.dispatchEvent(run_display)},2000)
 })
 
+// Add an event listener for all the responses sent from the display script
 document.addEventListener('send_response', function (e) {
+    // Gather the message to be displayed
     var message = e.detail
+    // Add the message to the messageArray
     messageArray.push(message)
+    // Check if the array contains all the messages of the url (async problems, async solutions)
     if (messageArray.length == messageCounter)
+            // Create a new image array 'displayArray' which filters out non-misinformation for display
+            // TODO -> only show distinct categories
             {var diplayArray = messageArray.filter(function(item) {
-    return item != '0.0'
-})
-
-
-                alert(diplayArray)}
-
+                return item != '0.0'})
+        // Send an alert with the contents of the filtered array
+        alert(diplayArray)
     }
-    )
-
-
-
+})
 
 /*BACKGROUND FUNCTIONS*/
 function pageCheck(){
