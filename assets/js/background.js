@@ -90,11 +90,12 @@ document.addEventListener('idle', function (e) {
 // Listen for the parser isolating paragraphs and process occordingly
 document.addEventListener('paragraph_found', function (e) {
     // Get the attached content in the event detail
-    var paragaph  = e.detail
+    var paragaph  = e.detail.paragraph
+    var p_id = e.detail.p_id
     // Log to console communicating that the paragraph has been seen (include paragraph chunk to check all are seen)    
     console.log('Paragraph Found: ' + paragaph.slice(0,20) + '...' )
     // Create a new event for the detected paragraph that will announce it is ready to be categorised.
-    var run_categorise = new CustomEvent('start_categorise', {"detail":  paragaph})
+    var run_categorise = new CustomEvent('start_categorise', {"detail":  {"paragraph":paragaph, "p_id": p_id}})
     // Dispatch this event
     document.dispatchEvent(run_categorise)
 })
@@ -102,11 +103,12 @@ document.addEventListener('paragraph_found', function (e) {
 // Listen for the recieval of non-zero classifications
 document.addEventListener('return_cat', function (e) {
     // Get the specific label
-    var cat = e.detail
+    var cat = e.detail.category
+    var p_id = e.detail.p_id
     // Log the label
     console.log('Claim categorized as: ' + cat )
     // Create a new event to trigger the display to user
-    var run_display = new CustomEvent('run_display', {"detail": cat})
+    var run_display = new CustomEvent('run_display', {"detail": {"category":cat, "p_id": p_id}})
     //Increment message counter 
     messageCounter += 1
     // Dispatch event for listener after a short delay to account for async
@@ -117,7 +119,16 @@ document.addEventListener('return_cat', function (e) {
 // Add an event listener for all the responses sent from the display script
 document.addEventListener('send_response', function (e) {
     // Gather the message to be displayed
-    var message = e.detail
+    var message = e.detail.message
+    var p_id = e.detail.p_id
+    // // If the message is not 0.0 highlight the affected paragraph on the main page
+    // if (message != '0.0'){
+    //     // Send a message to the handler with the paragraph ID
+    //     // TODO Add the paragraph ID to the details of the previous events
+    //     var highlight_claim = new CustomEvent('run_edit', {"detail": 3});
+    //     // Dispatch the message
+    //     document.dispatchEvent(highlight_claim);
+    // }
     // Add the message to the messageArray
     messageArray.push(message)
     // Check if the array contains all the messages of the url (async problems, async solutions)

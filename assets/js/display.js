@@ -3,7 +3,8 @@
 // Listen for the event that shows there is a label to show
 document.addEventListener('run_display', function (e) {
     // Get the label
-    var cat = e.detail
+    var cat = e.detail.category
+    var p_id = e.detail.p_id
     // Split the label into claim and subclaim
     var [main, sub] = cat.split('.')
 
@@ -14,7 +15,7 @@ document.addEventListener('run_display', function (e) {
     var message = responses[main][sub]
 
     // Serve this to the user as a popup alert
-    var send = new CustomEvent ('send_response',{"detail":message})
+    var send = new CustomEvent ('send_response',{"detail": {"message": message, "p_id": p_id}})
     document.dispatchEvent(send)
 
 })
