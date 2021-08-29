@@ -78,8 +78,6 @@ document.addEventListener('idle', function (e) {
             var messageCounter = 0
             // Set running to be false
             running = false
-
-
             return false
         }
     else return false
@@ -92,6 +90,11 @@ document.addEventListener('paragraph_found', function (e) {
     // Get the attached content in the event detail
     var paragaph  = e.detail.paragraph
     var p_id = e.detail.p_id
+    // Get the maximum paragraph index and set this as the message counter
+    if (p_id > messageCounter){
+        // Set the message counter to the paragraph ID
+        messageCounter = p_id
+    }
     // Log to console communicating that the paragraph has been seen (include paragraph chunk to check all are seen)    
     console.log('Paragraph Found: ' + paragaph.slice(0,20) + '...' )
     // Create a new event for the detected paragraph that will announce it is ready to be categorised.
@@ -109,8 +112,6 @@ document.addEventListener('return_cat', function (e) {
     console.log('Claim categorized as: ' + cat )
     // Create a new event to trigger the display to user
     var run_display = new CustomEvent('run_display', {"detail": {"category":cat, "p_id": p_id}})
-    //Increment message counter 
-    messageCounter += 1
     // Dispatch event for listener after a short delay to account for async
     setTimeout( function(){
         document.dispatchEvent(run_display)},2000)
@@ -132,7 +133,8 @@ document.addEventListener('send_response', function (e) {
     // Add the message to the messageArray
     messageArray.push(message)
     // Check if the array contains all the messages of the url (async problems, async solutions)
-    if (messageArray.length == messageCounter)
+    // Add 1 to message counter to account for 0 indexing
+    if (messageArray.length == messageCounter + 1)
             // Create a new image array 'displayArray' which filters out non-misinformation for display
             // TODO -> only show distinct categories
             {var diplayArray = messageArray.filter(function(item) {
