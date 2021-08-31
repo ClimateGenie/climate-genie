@@ -125,14 +125,6 @@ document.addEventListener('send_response', function (e) {
     // Gather the message to be displayed
     var message = e.detail.message
     var p_id = e.detail.p_id
-    // // If the message is not 0.0 highlight the affected paragraph on the main page
-    // if (message != '0.0'){
-    //     // Send a message to the handler with the paragraph ID
-    //     // TODO Add the paragraph ID to the details of the previous events
-    //     var highlight_claim = new CustomEvent('run_edit', {"detail": 3});
-    //     // Dispatch the message
-    //     document.dispatchEvent(highlight_claim);
-    // }
     // Add the message to the messageArray, along with the id
     messageArray.push({message:message, p_id:p_id})
     // Check if the array contains all the messages of the url (async problems, async solutions)
