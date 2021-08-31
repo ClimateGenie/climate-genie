@@ -17,9 +17,17 @@
     "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js", "assets/js/categorise.js", "assets/js/display.js"],
     "persistent": false
   },
-    "browser_action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "/assets/Icons/LilClimateGenie.png",
-    "default_script": "/assets/js/popup.js" }
-
+    "default_script": "/assets/js/popup.js"
+  },
+  	"content_scripts" : [
+		{
+			"matches" : [
+				"<all_urls>"
+                 ],
+                  "js" : ["/assets/js/content.js"]
+        }
+    ]
 }

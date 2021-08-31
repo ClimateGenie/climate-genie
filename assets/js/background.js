@@ -10,6 +10,8 @@ var current_url
 var messageArray
 // A counter that is the length of message array just set independently
 var messageCounter = 0
+// Varable to store the ta_id for the run statement, saves it getting passed through all the events
+var tab_id
 
 
 // Event Triggers
@@ -53,6 +55,8 @@ document.addEventListener('run', function (e) {
     if (e.detail.url != current_url) {
         // Set current url
         current_url = e.detail.url
+        //Set the tab_id
+        tab_id = e.detail.tab_id
         // empty message array
         messageArray = []
         var messageCounter = 0
@@ -113,8 +117,7 @@ document.addEventListener('return_cat', function (e) {
     // Create a new event to trigger the display to user
     var run_display = new CustomEvent('run_display', {"detail": {"category":cat, "p_id": p_id}})
     // Dispatch event for listener after a short delay to account for async
-    setTimeout( function(){
-        document.dispatchEvent(run_display)},2000)
+    document.dispatchEvent(run_display)
 })
 
 // Add an event listener for all the responses sent from the display script
@@ -130,17 +133,17 @@ document.addEventListener('send_response', function (e) {
     //     // Dispatch the message
     //     document.dispatchEvent(highlight_claim);
     // }
-    // Add the message to the messageArray
-    messageArray.push(message)
+    // Add the message to the messageArray, along with the id
+    messageArray.push({message:message, p_id:p_id})
     // Check if the array contains all the messages of the url (async problems, async solutions)
     // Add 1 to message counter to account for 0 indexing
     if (messageArray.length == messageCounter + 1)
             // Create a new image array 'displayArray' which filters out non-misinformation for display
             // TODO -> only show distinct categories
             {var diplayArray = messageArray.filter(function(item) {
-                return item != '0.0'})
-        // Send an alert with the contents of the filtered array
-        alert(diplayArray)
+                return item.message != '0.0'})
+        //Send meaasge to content script to display
+        chrome.tabs.sendMessage(tab_id,{message:"disp", content:diplayArray});
     }
 })
 
