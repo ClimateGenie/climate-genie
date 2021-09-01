@@ -133,7 +133,7 @@ document.addEventListener('send_response', function (e) {
             // Create a new image array 'displayArray' which filters out non-misinformation for display
             // TODO -> only show distinct categories
             {var diplayArray = messageArray.filter(function(item) {
-                return item.message != '0.0'})
+                return item.message != "\"No misinformation\"\n"})
         //Send meaasge to content script to display
         chrome.tabs.sendMessage(tab_id,{message:"disp", content:diplayArray});
     }
