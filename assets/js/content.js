@@ -14,9 +14,7 @@ chrome.runtime.onMessage.addListener( function (request) {
             var ps = document.getElementsByTagName('p')
 
             // Underline and turn text green for each paragraph
-            ps[p_id].style.textDecoration = 'underline'
-            ps[p_id].style.textDecorationColor = 'green'
-            ps[p_id].style.color = 'green'
+            ps[p_id].style.backgroundColor = 'green'
 
             ps[p_id].onclick = function () {
                 alert(displayArray[i].message)
