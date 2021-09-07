@@ -5,7 +5,19 @@ var backgroundPage;
 document.addEventListener('DOMContentLoaded', function () {
 
     backgroundPage = chrome.extension.getBackgroundPage();
-    
+
+
+    // Random Genie Image
+    var path = '/assets/Icons/Avatars',
+    imgs = ['preach.png','grr.png','question.png','run.png','superman.png', 'think.png','thumbs-up.png','woo.png'],
+    i = Math.floor(Math.random()*imgs.length);
+    document.getElementById('el').src = path+'/' +imgs[i]
+
+
+
+
+
+
     /*RUN-MANUAL*/
     if ( ! backgroundPage.extensionEnabled) {
         document.getElementById('cg-run').style.background = '#808286'
