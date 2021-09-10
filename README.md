@@ -1,13 +1,9 @@
 # Climate-Genie
 
-A web extension for recognising and debunking climate misinformation. Built in two key parts, a community reporting system and a web application. Implemented into the chrome web store as an extension.
+Built in conjuction with the Monash Climate Change Communcation Hub, this web extension seeks to address the issue of Climate Change misinformation in Australian media.
 
-## Web Application
+Utilising the CARDS API created by Dr John Cook and Dr Travis Coan, the Climate Genie web extension parses news articles related to Climate Change, checking each paragraph for misinformation, to then present the idenitified misniformation and a counter.
 
-Using community submitted debunking statements, a 'climate genie' will pop up along-side the article and debunk the misinformation in the article. The genie will refer the reader to more reputable links.
+This application runs off of Javascript with the supplement of a personal Flask API for dynamic debunk claims for each identified misinformation claim.
 
 ![sample-web-view](https://github.com/Fonzzy1/Climate-Genie/blob/main/assets/Screenshots/WebpagePilotImage.png?raw=true)
-
-## Community Reporting system
-
-By clicking on the extension while on a page, the user will have an option to report the current page for climate misinformation. After the user codifies the type of misinformation, the report will be added to a database and displayed for other users to deconstruct and debunk. After being verified, the report will then be presented by the climate genie when people access the reported page.
