@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', function () {
     i = Math.floor(Math.random()*imgs.length);
     document.getElementById('el').src = path+'/' +imgs[i]
 
+    //Load News Stories From API
+    //const API_URL = 'https://api.climateclock.world/v1/clock?device=widget';
+    //var stories = new XMLHttpRequest();
+    //stories.open('GET',API_URL)
+    //stories.onload = function () {
+    //    json_obj = JSON.parse(this.response)
+    //    news_stories = json_obj.data.modules.newsfeed_1.newsfeed
+    //
+    //    for (let i = 0; i < news_stories.length; i++) {
+    //       div = document.getElementById('cg-headlines');
+    //       headline = document.createElement("p")
+    //             var hyperlink = document.createElement("a")
+    //                hyperlink.text = news_stories[i].headline;
+    //                hyperlink.href = news_stories[i].link;
+    //             headline.appendChild(hyperlink)
+    //       div.appendChild(headline)            }
+    //}
+    //stories.send()
 
 
 
