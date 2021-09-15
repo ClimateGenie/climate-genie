@@ -16,7 +16,7 @@ body {
 }
 
 #cg-header img {
-    width: 25px;
+    width: 1px;
     height: auto;
     float: left;
     display: inline-block
@@ -101,49 +101,65 @@ textarea {
 }
 
 /* The slider */
-.slider {
-  position: absolute;
+/* Customize the label (the container) */
+.container {
+  display: flex;
+  float: right;
+  padding-left: 0px;
+  margin-bottom: 0px;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
+  font-size: 0px;
 }
 
-.slider:before {
+/* Hide the browser's default radio button */
+.switch input {
   position: absolute;
-  content: "";
-  height: 13px;
-  width: 13px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(13px);
-  -ms-transform: translateX(13px);
-  transform: translateX(13px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 17px;
-}
-
-.slider.round:before {
+/* Create a custom radio button */
+.checkmark {
+  float:right;
+  height: 50px;
+  width: 50px;
+  background-color: #eee;
   border-radius: 50%;
 }
 
+/* On mouse-over, add a grey background color */
+.switch:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.switch input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: relative;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.switch input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.switch .checkmark:after {
+  top: 20px;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+}
 .arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
