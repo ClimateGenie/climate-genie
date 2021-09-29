@@ -26,7 +26,7 @@ function parser() {
 				// Get the string from that element -> using innerHTML to strip away unecessary tags/characters
 				var string = resultText[i].innerHTML
 				// Create a new event containing the above generated string and paragraph ID
-				var paragraph = new CustomEvent('paragraph_found', {"detail": {"paragraph": string, "p_id": i}})
+				var paragraph = new CustomEvent('paragraph_found', {"detail": {"paragraph": string, "p_id": i, "url": domain}})
 				// Dispatch this event to be picked up and processed back in the background scripts
 				document.dispatchEvent(paragraph)
 			}

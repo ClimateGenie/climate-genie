@@ -94,6 +94,7 @@ document.addEventListener('paragraph_found', function (e) {
     // Get the attached content in the event detail
     var paragaph  = e.detail.paragraph
     var p_id = e.detail.p_id
+    var url = e.detail.url
     // Get the maximum paragraph index and set this as the message counter
     if (p_id > messageCounter){
         // Set the message counter to the paragraph ID
@@ -102,7 +103,7 @@ document.addEventListener('paragraph_found', function (e) {
     // Log to console communicating that the paragraph has been seen (include paragraph chunk to check all are seen)    
     console.log('Paragraph Found: ' + paragaph.slice(0,20) + '...' )
     // Create a new event for the detected paragraph that will announce it is ready to be categorised.
-    var run_categorise = new CustomEvent('start_categorise', {"detail":  {"paragraph":paragaph, "p_id": p_id}})
+    var run_categorise = new CustomEvent('start_categorise', {"detail":  {"paragraph":paragaph, "p_id": p_id, "url": url}})
     // Dispatch this event
     document.dispatchEvent(run_categorise)
 })
