@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener( function (request) {
 
 
 // This listens for when tabs are activated
-chrome.tabs.onUpdated.addListener(function (){
+chrome.webNavigation.onCompleted.addListener(function (){
     pageCheck()
 });
 
@@ -55,7 +55,7 @@ document.addEventListener('run', function (e) {
     if (e.detail.url != current_url) {
         // Set current url
         current_url = e.detail.url
-        //Set the tab_id
+	//Set the tab_id
         tab_id = e.detail.tab_id
         // empty message array
         messageArray = []
