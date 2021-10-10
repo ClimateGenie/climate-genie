@@ -11,7 +11,7 @@
     "activeTab"
   ],
   "icons": {
-	"48": "/assets/Icons/LilClimateGenie.png"
+	"48": "/assets/Icons/Avatars/woo.png"
   },
     "background": {
     "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js", "assets/js/categorise.js", "assets/js/display.js"],
@@ -19,7 +19,7 @@
   },
   "browser_action": {
     "default_popup": "popup.html",
-    "default_icon": "/assets/Icons/LilClimateGenie.png",
+    "default_icon": "/assets/Icons/Avatars/woo.png",
     "default_script": "/assets/js/popup.js"
   },
   	"content_scripts" : [
