@@ -17,12 +17,15 @@ document.addEventListener('start_categorise', function (event) {
     category.onload = function(){
         // If the returned status is valid
         if(category.status >= 200 && category.status < 400){
+            // Parse the json response
+            resp = JSON.parse(this.response)
             // Assign the response to the category found taking away the quotation marks
-            classification = this.response.slice(1,4)
+            classification = resp.claim
+            // Also get the probability of the classification
+            prob = resp.prob
             // Log the message
-            console.log(classification)
             // Serve this to the user as a popup alert
-            var return_categorise = new CustomEvent('return_cat', {'detail': {"category":classification, "p_id": p_id}})
+            var return_categorise = new CustomEvent('return_cat', {'detail': {"category":classification, "p_id": p_id, "prob": prob}})
             document.dispatchEvent(return_categorise)
         }
         // In the case of a bad API call log Error to the console and instead pass to cards 

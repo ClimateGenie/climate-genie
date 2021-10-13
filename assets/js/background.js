@@ -113,10 +113,11 @@ document.addEventListener('return_cat', function (e) {
     // Get the specific label
     var cat = e.detail.category
     var p_id = e.detail.p_id
+    var prob = e.detail.prob
     // Log the label
     console.log('Claim categorized as: ' + cat )
     // Create a new event to trigger the display to user
-    var run_display = new CustomEvent('run_display', {"detail": {"category":cat, "p_id": p_id}})
+    var run_display = new CustomEvent('run_display', {"detail": {"category":cat, "p_id": p_id, "prob": prob}})
     // Dispatch event for listener after a short delay to account for async
     document.dispatchEvent(run_display)
 })

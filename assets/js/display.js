@@ -5,6 +5,7 @@ document.addEventListener('run_display', function (e) {
     // Get the label
     var cat = e.detail.category
     var p_id = e.detail.p_id
+    var prob = e.detail.prob
 
     // Use a HTTP Request to retrieve the debunk response
     var debunk = new XMLHttpRequest();
@@ -15,8 +16,11 @@ document.addEventListener('run_display', function (e) {
     debunk.onload = function(){
         // If the returned status is valid
         if(debunk.status >= 200 && debunk.status < 400){
-            // Assign the response to teh variable message
+            // Assign the response to the variable message
             message = this.response
+            // Substitute the probability into the retrieved statement
+            percentage = Math.round(prob * 100)
+            message = message.replace('CLAIM_PROB', String(percentage))
             // Log the message
             console.log(message)
             // Serve this to the user as a popup alert
