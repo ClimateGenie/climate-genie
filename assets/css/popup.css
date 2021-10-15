@@ -171,3 +171,10 @@ textarea {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
+.frame {
+  background-image: url('/assets/Icons/homebg.png'), url('/assets/Icons/homebg_footer.png'); 
+  background-position: center top, center bottom; 
+  background-size: 100% 25%, 100% 20%; 
+  background-repeat: no-repeat, no-repeat;
+}

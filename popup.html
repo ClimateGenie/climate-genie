@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-   <link rel="stylesheet" href="assets/css/popup.css">
-   <title>Climate Genie</title>
+    <link rel="stylesheet" href="assets/css/toggle.css">
+    <link rel="stylesheet" href="assets/css/popup.css">
+    <title>Climate Genie</title>
 </head>
-<body>
 
+<body class="frame">
 
     <div id="cg-wrapper">
 
@@ -14,10 +14,11 @@
 
             <a href='https://climate-genie-api.herokuapp.com/'><img src="/assets/Icons/CARDS-Logo2.png" style="height:auto; width:200px"></a>
 
-            <label class="switch" >
+            <label class="switch" style="margin-right: 20px; margin-top: 18px">
                 <input type="checkbox" id=toggleOnOff>
-                <span class="checkmark"></span>
-        </img><br><br><br>
+                <span></span>
+            </label>
+        <br><br><br>
 
         </div>
 
@@ -26,7 +27,8 @@
         </div>
 
         <div id="cg-containers">
-            <img id="el" style = "height:auto; width:260px">
+            
+            <img id="el" style = "height:auto; width:260px; margin-top: 25px; margin-bottom: 15px;">
 
             <div class=cg-buttons>
                 <a class="button" id="cg-contact" href="mailto:genie4climate@gmail.com">Contact</a>

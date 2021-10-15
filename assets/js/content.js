@@ -20,7 +20,8 @@ chrome.runtime.onMessage.addListener( function (request) {
             ps[p_id].onmouseover = function (e) {
                 // Create a new nonresizable window called 'Climate Genie'
                 popupWindow = window.open("", "Climate Genie", "toolbar=yes,scrollbars=no,resizable=no,menubar=no,titlebar=no,location=no,top="+ (e.pageY)+ ",left="+ (e.pageX)+ ",width=400,height=400");
-		        popupWindow.document.write('<html><head> <title>Climate Genie</title></head><body>');
+		        popupWindow.document.write('<html><head><title>Climate Genie</title></head><body>');
+                // Add Header, genie image, greeting and then message, with the more info broken into a button ideally
                 popupWindow.document.write(displayArray[i].message);
                 popupWindow.document.write('</body></html>');;
             };
