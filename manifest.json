@@ -18,6 +18,7 @@
     "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js", "assets/js/categorise.js", "assets/js/display.js"],
     "persistent": false
   },
+  "web_accessible_resources": ["message.html"],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "/assets/Icons/Avatars/woo.png",
