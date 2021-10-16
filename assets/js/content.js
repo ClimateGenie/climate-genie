@@ -24,7 +24,13 @@ chrome.runtime.onMessage.addListener( function (request) {
                 // Add Header, genie image, greeting and then message, with the more info broken into a button ideally
                 popupCSS = chrome.runtime.getURL("assets/css/message.css")
                 headerImage = chrome.runtime.getURL("/assets/Icons/CARDS-Logo2.png")
-                popupWindow.document.write("<html><head><link rel='stylesheet' href='" + popupCSS + "'><title>Climate Genie</title></head><body class='frame' style='border-radius: 10px; -webkit-border-radius: 10px; perspective: 1px;'><div id='cg-wrapper'><div id='cg-header' style= 'margin-bottom:90px'><a href='https://climate-genie-api.herokuapp.com/'><img src='" + headerImage + "' style='height:auto; width:200px'></a><br><br><br></div><div id='cg-containers'><p id='message' style='text-align: center; margin-top: 60px'>" + displayArray[i].message +"</p><img id='el' src= 'https://raw.githubusercontent.com/KalykeXIII/climate-genie-api/main/static/images/thumbs-up.png' style = 'height:auto; width:260px; margin-top: 5px; margin-bottom: 15px;'></div></body></html>")   
+
+		    
+   		 // Random Genie Image
+   		 var path = chrome.runtime.getURL("assets/Icons/Avatars")
+		 imgs = ['preach.png','grr.png','question.png','run.png','superman.png', 'think.png','thumbs-up.png','woo.png'],
+   		 k = Math.floor(Math.random()*imgs.length);
+                popupWindow.document.write("<html><head><link rel='stylesheet' href='" + popupCSS + "'><title>Climate Genie</title></head><body class='frame' style='border-radius: 10px; -webkit-border-radius: 10px; perspective: 1px;'><div id='cg-wrapper'><div id='cg-header' style= 'margin-bottom:90px'><a href='https://climate-genie-api.herokuapp.com/'><img src='" + headerImage + "' style='height:auto; width:200px'></a><br><br><br></div><div id='cg-containers'><p id='message' style='text-align: center; margin-top: 60px'>" + displayArray[i].message +"</p><img id='el' src= '" + path +"/" + imgs[k] + "' style = 'height:auto; width:260px; margin-top: 5px; margin-bottom: 15px;'></div></body></html>")   
             };
             
             // On leaving the text object close any open popups
