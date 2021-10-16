@@ -1,5 +1,11 @@
+html {
+  background: white;
+}
+
+
 body {
     width: 275px;
+    background: white;
 }
 
 #cg-wrapper {
