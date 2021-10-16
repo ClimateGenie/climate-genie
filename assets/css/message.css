@@ -1,0 +1,186 @@
+html {
+  background: white;
+}
+
+
+body {
+    width: 275px;
+    background: white;
+}
+
+#cg-wrapper {
+    padding: 5px;
+}
+
+#cg-header h1 {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 5px;
+    position: relative;
+    left: 8px;
+    display: inline-block
+}
+
+#cg-header img {
+    width: 1px;
+    height: auto;
+    float: left;
+    display: inline-block
+}
+
+.button {
+    font-family: Roboto, system-ui, sans-serif;
+    text-decoration: none;
+    align-items: center;
+    border: 1px solid rgb( 218, 220, 224 );
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: rgb( 26, 115, 232 );
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-weight: 500;
+    height: 32px;
+    justify-content: center;
+    min-width: 5.14em;
+    outline-width: 0;
+    padding: 8px 16px;
+    position: relative;
+    user-select: none;
+    background: white;
+    margin: 10px 0 5px 10px;
+}
+
+.cg-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.button:hover {
+    background: rgba( 66, 133, 244, .04 );
+    border-color: rgb(210, 227, 252);
+}
+
+.button.primary {
+    background: rgb( 26, 115, 232 );
+    color: #fff;
+    border-color: rgb( 26, 115, 232 );
+}
+
+.button.primary:hover {
+    background: rgba( 26, 115, 232, 0.9 );
+    box-shadow: 0 1px 2px 0 rgba( 66, 133, 244, .3),
+    0 1px 3px 1px rgba( 66, 133, 244, .15);
+}
+
+textarea {
+    border: 2px solid rgba( 26, 115, 232, 0.4 );
+    font-family: Roboto, system-ui, sans-serif;
+    padding: 8px;
+    border-radius: 4px;
+    display: block;
+    width: 224px;
+    margin-top: 5px;
+}
+
+.cg-buttons p {
+    margin: 10px 0 5px 10px;
+    display: inline-block
+}
+
+/* The switch - the box around the slider */
+.switch {
+  top: 4px;
+  position: relative;
+  float: right;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+/* Customize the label (the container) */
+.container {
+  display: flex;
+  float: right;
+  padding-left: 0px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  font-size: 0px;
+}
+
+/* Hide the browser's default radio button */
+.switch input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  float:right;
+  height: 50px;
+  width: 50px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.switch:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.switch input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: relative;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.switch input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.switch .checkmark:after {
+  top: 20px;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.frame {
+  background-image: url('/assets/Icons/homebg.png'), url('/assets/Icons/homebg_footer.png'); 
+  background-position: center top, center bottom; 
+  background-size: 100% 15%, 100% 20%; 
+  background-repeat: no-repeat, no-repeat;
+}

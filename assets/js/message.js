@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Random Genie Image
-    var path = '/assets/Icons/Avatars',
+    var path = 'https://raw.githubusercontent.com/KalykeXIII/climate-genie-api/main/static/images/',
     imgs = ['preach.png','grr.png','question.png','run.png','superman.png', 'think.png','thumbs-up.png','woo.png'],
     i = Math.floor(Math.random()*imgs.length);
     document.getElementById('el').src = path+'/' +imgs[i]

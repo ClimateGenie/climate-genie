@@ -20,18 +20,16 @@ chrome.runtime.onMessage.addListener( function (request) {
             ps[p_id].onmouseover = function (e) {
                 // Create a new nonresizable window called 'Climate Genie'
                 url = chrome.runtime.getURL("message.html");
-                popupWindow = window.open(url, "Climate Genie", "toolbar=yes,scrollbars=no,resizable=no,menubar=no,titlebar=no,location=no,top="+ (e.pageY)+ ",left="+ (e.pageX)+ ",width=300,height=800");
-                message_div = popupWindow.document.getElementById('message')
-                popupWindow.log(message_div)
-                message_div.innerText = displayArray[i].message
+                popupWindow = window.open('', "Climate Genie", "toolbar=yes,scrollbars=no,resizable=no,menubar=no,titlebar=no,location=no,top="+ (e.pageY)+ ",left="+ (e.pageX)+ ",width=300,height=750");
                 // Add Header, genie image, greeting and then message, with the more info broken into a button ideally
-               // popupWindow.document.write(displayArray[i].message);
-               // popupWindow.document.write('</body></html>');;
+                popupCSS = chrome.runtime.getURL("assets/css/message.css")
+                headerImage = chrome.runtime.getURL("/assets/Icons/CARDS-Logo2.png")
+                popupWindow.document.write("<html><head><link rel='stylesheet' href='" + popupCSS + "'><title>Climate Genie</title></head><body class='frame' style='border-radius: 10px; -webkit-border-radius: 10px; perspective: 1px;'><div id='cg-wrapper'><div id='cg-header' style= 'margin-bottom:90px'><a href='https://climate-genie-api.herokuapp.com/'><img src='" + headerImage + "' style='height:auto; width:200px'></a><br><br><br></div><div id='cg-containers'><p id='message' style='text-align: center; margin-top: 60px'>" + displayArray[i].message +"</p><img id='el' src= 'https://raw.githubusercontent.com/KalykeXIII/climate-genie-api/main/static/images/thumbs-up.png' style = 'height:auto; width:260px; margin-top: 5px; margin-bottom: 15px;'></div></body></html>")   
             };
             
             // On leaving the text object close any open popups
             ps[p_id].onmouseleave = function () {
-                // popupWindow.close()
+                popupWindow.close()
             };
         }
     }

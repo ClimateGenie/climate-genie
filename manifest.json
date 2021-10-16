@@ -18,7 +18,7 @@
     "scripts": ["/assets/js/background.js","/assets/js/check.js", "assets/js/parse.js", "assets/js/categorise.js", "assets/js/display.js"],
     "persistent": false
   },
-  "web_accessible_resources": ["message.html"],
+  "web_accessible_resources": ["message.html", "/assets/Icons/CARDS-Logo2.png", "assets/css/message.css", "/assets/Icons/homebg.png", "/assets/Icons/homebg_footer.png", "/assets/js/message.js", "assets/Icons/Avatars/*"],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "/assets/Icons/Avatars/woo.png",
