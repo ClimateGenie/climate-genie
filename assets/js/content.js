@@ -22,6 +22,7 @@ chrome.runtime.onMessage.addListener( function (request) {
                 url = chrome.runtime.getURL("message.html");
                 popupWindow = window.open(url, "Climate Genie", "toolbar=yes,scrollbars=no,resizable=no,menubar=no,titlebar=no,location=no,top="+ (e.pageY)+ ",left="+ (e.pageX)+ ",width=300,height=800");
                 message_div = popupWindow.document.getElementById('message')
+                popupWindow.log(message_div)
                 message_div.innerText = displayArray[i].message
                 // Add Header, genie image, greeting and then message, with the more info broken into a button ideally
                // popupWindow.document.write(displayArray[i].message);
@@ -30,7 +31,7 @@ chrome.runtime.onMessage.addListener( function (request) {
             
             // On leaving the text object close any open popups
             ps[p_id].onmouseleave = function () {
-                popupWindow.close()
+                // popupWindow.close()
             };
         }
     }
