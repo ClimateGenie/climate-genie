@@ -7,61 +7,50 @@ document.addEventListener('DOMContentLoaded', function () {
     backgroundPage = chrome.extension.getBackgroundPage();
 
 
-    // Random Genie Image
-    var path = '/assets/Icons/Avatars',
-    imgs = ['preach.png','grr.png','question.png','run.png','superman.png', 'think.png','thumbs-up.png','woo.png'],
+    // Assign a  random genie image to the 'el' div
+    //Assign a variable to the loaction of the genie avatars
+    var path = '/assets/Icons/Avatars
+    // Hard code in a list of images TODO:Change to dynamic list	
+    imgs = ['preach.png','grr.png','question.png','run.png','superman.png', 'think.png','thumbs-up.png','woo.png']
+    // Get a random index I for the list of images
     i = Math.floor(Math.random()*imgs.length);
+    // Set the src for the empty el element with the random image
     document.getElementById('el').src = path+'/' +imgs[i]
 
-    //Load News Stories From API
-    //const API_URL = 'https://api.climateclock.world/v1/clock?device=widget';
-    //var stories = new XMLHttpRequest();
-    //stories.open('GET',API_URL)
-    //stories.onload = function () {
-    //    json_obj = JSON.parse(this.response)
-    //    news_stories = json_obj.data.modules.newsfeed_1.newsfeed
-    //
-    //    for (let i = 0; i < news_stories.length; i++) {
-    //       div = document.getElementById('cg-headlines');
-    //       headline = document.createElement("p")
-    //             var hyperlink = document.createElement("a")
-    //                hyperlink.text = news_stories[i].headline;
-    //                hyperlink.href = news_stories[i].link;
-    //             headline.appendChild(hyperlink)
-    //       div.appendChild(headline)            }
-    //}
-    //stories.send()
 
 
-
-
-
-    /*RUN-MANUAL*/
+    // Alter the style of the run button for various states
+    
+    //For the off state	
     if ( ! backgroundPage.extensionEnabled) {
         document.getElementById('cg-run').style.background = '#808286'
         document.getElementById('cg-run').style.borderColor = '#808286'
         document.getElementById('cg-run').textContent = 'Inactive'
     }
 
+    // For the active state
     else if (backgroundPage.running && backgroundPage.extensionEnabled) {
         document.getElementById('cg-run').style.background = '#20cc55'
         document.getElementById('cg-run').style.borderColor = '#20cc55'
         document.getElementById('cg-run').textContent = 'Active'
     }
 
+    // For the idle state	
     else
     {
         document.getElementById('cg-run').style.background = '#1A73E8'
         document.getElementById('cg-run').style.borderColor = '#1A73E8'
         document.getElementById('cg-run').textContent = 'Run'
     }
+    
     // Add event listener to the run button
     document.getElementById('cg-run').addEventListener('click', function () {
-        // Set appearance changes (colour + text)
+        // Set appearance changes to match the activee stat
         document.getElementById('cg-run').style.background = '#20cc55'
         document.getElementById('cg-run').style.borderColor = '#20cc55'
         document.getElementById('cg-run').textContent = 'Active'
         // Send message stating a manual run has bee requested
+	// Will be Managed by background.js 
         chrome.runtime.sendMessage({message: 'Manual Run'})
     });
 
