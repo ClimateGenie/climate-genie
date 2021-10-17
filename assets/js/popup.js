@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Assign a  random genie image to the 'el' div
     //Assign a variable to the loaction of the genie avatars
-    var path = '/assets/Icons/Avatars
+    var path = '/assets/Icons/Avatars'
     // Hard code in a list of images TODO:Change to dynamic list	
     imgs = ['preach.png','grr.png','question.png','run.png','superman.png', 'think.png','thumbs-up.png','woo.png']
     // Get a random index I for the list of images
