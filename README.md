@@ -6,7 +6,7 @@ Utilising the CARDS API created by Dr John Cook and Dr Travis Coan, the Climate 
 
 This application runs off of Javascript with the supplement of a personal Flask API for dynamic debunk claims for each identified misinformation claim.
 
-![sample-web-view](https://github.com/Fonzzy1/Climate-Genie/blob/main/assets/Screenshots/Popup?raw=true)
+![sample-web-view](https://github.com/Fonzzy1/climate-genie/blob/main/assets/Screenshots/Popup.png)
 
 
 
