@@ -2,7 +2,7 @@
 
 // Variable to store the status of the extension
 var extensionEnabled = true;
-// Boolean to track whether or not the extension is running on the 
+// Boolean to track whether or not the extension is running on the current page
 var running = false
 // Value for current URL
 var current_url
@@ -10,16 +10,24 @@ var current_url
 var messageArray
 // A counter that is the length of message array just set independently
 var messageCounter = 0
-// Varable to store the ta_id for the run statement, saves it getting passed through all the events
+// Variable to store the tab_id for the run statement, saves it getting passed through all the events
 var tab_id
 
 
-// Event Triggers
+// Event Triggers for consistent events that take no parameters
 const run_check = new Event('start_check');
 const run_nocheck = new Event('start_run');
 const run_parse = new Event('start_parse');
 
 
+/*MAIN EXECUTION FUNCTION*/
+// This listens for when tabs are activated
+chrome.webNavigation.onCompleted.addListener(function (){
+    pageCheck()
+});
+
+
+/*JOB DISPATCH: MANUAL*/
 // Add a listener for messages sent from the popup
 chrome.runtime.onMessage.addListener( function (request) {
     // If the received message is requesting a manual run
@@ -43,14 +51,8 @@ chrome.runtime.onMessage.addListener( function (request) {
     }
 })
 
-
-// This listens for when tabs are activated
-chrome.webNavigation.onCompleted.addListener(function (){
-    pageCheck()
-});
-
-
-// Wait for response from the test to run page anf then log run statement
+/*JOB DISPATCH: AUTOMATIC*/
+// Wait for response from the test to run page and then log run statement
 document.addEventListener('run', function (e) {
     if (e.detail.url != current_url) {
         // Set current url
@@ -58,19 +60,19 @@ document.addEventListener('run', function (e) {
 	//Set the tab_id
         tab_id = e.detail.tab_id
         // empty message array
+
         messageArray = []
         var messageCounter = 0
         // Set running to be true
         running = true;
         // Log the event trigger
         console.log('Parse the page contents')
-        // Dispatch an event to trigger the 'run-parse' function
+        // Dispatch an event to trigger the 'run-parse' function -> parse.js
         document.dispatchEvent(run_parse)
         return false
     }
     else return false
 });
-
 
 // Listen for idle event
 document.addEventListener('idle', function (e) {
@@ -89,6 +91,7 @@ document.addEventListener('idle', function (e) {
 });
 
 
+/*PARAGRAPH HANDLER*/
 // Listen for the parser isolating paragraphs and process occordingly
 document.addEventListener('paragraph_found', function (e) {
     // Get the attached content in the event detail
@@ -102,12 +105,14 @@ document.addEventListener('paragraph_found', function (e) {
     }
     // Log to console communicating that the paragraph has been seen (include paragraph chunk to check all are seen)    
     console.log('Paragraph Found: ' + paragaph.slice(0,20) + '...' )
-    // Create a new event for the detected paragraph that will announce it is ready to be categorised.
+    // Create a new event for the detected paragraph that will announce it is ready to be categorised. -> categorise.js
     var run_categorise = new CustomEvent('start_categorise', {"detail":  {"paragraph":paragaph, "p_id": p_id, "url": url}})
     // Dispatch this event
     document.dispatchEvent(run_categorise)
 })
 
+
+/*CATEGORY HANDLER*/
 // Listen for the recieval of non-zero classifications
 document.addEventListener('return_cat', function (e) {
     // Get the specific label
@@ -116,12 +121,13 @@ document.addEventListener('return_cat', function (e) {
     var prob = e.detail.prob
     // Log the label
     console.log('Claim categorized as: ' + cat )
-    // Create a new event to trigger the display to user
+    // Create a new event to trigger the display to user -> display.js
     var run_display = new CustomEvent('run_display', {"detail": {"category":cat, "p_id": p_id, "prob": prob}})
     // Dispatch event for listener after a short delay to account for async
     document.dispatchEvent(run_display)
 })
 
+/*DEBUNK HANDLER*/
 // Add an event listener for all the responses sent from the display script
 document.addEventListener('send_response', function (e) {
     // Gather the message to be displayed
