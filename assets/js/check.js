@@ -25,16 +25,35 @@ function test_to_run() {
     var  run = new CustomEvent('run',  {"detail": {"url":url,"tab_id":tab_id } });
     var  idle = new CustomEvent('idle',  {"detail": {"url":url,"tab_id":tab_id } });
 
-    // Instantiate a counter to check relevance
-    var stat = bayesfilter(title)
-    // If enough keywords match, call to run, else idle
-    if (stat > 0.5) {
-        console.log('Dispatch Run at Tab_id:' + tab_id + ', Probability of ' + stat)
-        document.dispatchEvent(run)
+    // Parse the page title to the API to check whether or not the article is climate related
+    // Use a HTTP Request to retrieve the probabilistic estimate
+    var likelihood = new XMLHttpRequest();
+
+    // Open a new GET request
+    likelihood.open('GET', 'http://climate-genie-api.herokuapp.com/bayes/'+title);
+    // Parse the data we get as a reponse
+    likelihood.onload = function(){
+        // If the returned status is valid
+        if(likelihood.status >= 200 && likelihood.status < 400){
+            // Assign the response to the variable message
+            stat = this.response
+            // If enough keywords match, call to run, else idle
+            if (stat > 0.5) {
+                console.log('Dispatch Run at Tab_id:' + tab_id + ', Probability of ' + stat)
+                document.dispatchEvent(run)
+            }
+            else{ console.log('Dispatch Idle at Tab_id:' + tab_id+ ', Probability of ' + stat)
+                document.dispatchEvent(idle)}
+        }
+        // In the case of a bad API call log Error to the console as well as the HTTP error
+        else {
+            console.log('Error')
+        }
     }
-    else{ console.log('Dispatch Idle at Tab_id:' + tab_id+ ', Probability of ' + stat)
-        document.dispatchEvent(idle)}
-    })}
+    // Send the request
+    likelihood.send()
+    })
+}
 
 // Runs the site content regardless of what it is
 function just_run() {
@@ -50,7 +69,6 @@ function just_run() {
      console.log('Retrieving Tab Info')
      // Instantiate all the tab information details
      var tab = tabs[0];
-     var title = tab.title
      var url = tab.url
      var tab_id = tab.id
      // Instantiate the possible output event
@@ -61,31 +79,3 @@ function just_run() {
      document.dispatchEvent(run)
      })}
 
-
-function bayesfilter(str) {
-
-    let requestURL = 'https://raw.githubusercontent.com/Fonzzy1/climate-genie/main/assets/json/probabilities.json'
-    let request = new XMLHttpRequest();
-    request.onload = () => {
-        const probs_raw = request.response; // get the string from the response
-        var p = JSON.parse(probs_raw); // convert it to an object
-
-        var string_arr =  str.split(" ")
-        var a = 1
-        var b = 1
-        // Note equation in for a/(a+b), a = product of p, b = product 1-p
-        for (let i = 0; i < string_arr.length; i++) {
-            var hold= p["0"][string_arr[i].toLowerCase()]
-            if (hold < 1){
-                a *= hold
-                b *= 1-hold
-            }
-        }
-    
-        var stat = a/(a+b)
-        return stat
-      };
-    request.open('GET', requestURL)
-    request.responseType = 'json';
-    request.send();
-}
